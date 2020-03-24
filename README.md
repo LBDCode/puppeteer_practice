@@ -1,5 +1,7 @@
 # puppeteer_practice
-## NPM install, then run from console w/ node (node app.js)
+### To run:
+- NPM install
+- then run from console w/ node (node app.js)
 
 ### Requirements:
 - Navigate to page
