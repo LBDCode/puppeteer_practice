@@ -1,0 +1,23 @@
+{
+  "name": "puppeteer_practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LBDCode/puppeteer_practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LBDCode/puppeteer_practice/issues"
+  },
+  "homepage": "https://github.com/LBDCode/puppeteer_practice#readme",
+  "dependencies": {
+    "puppeteer": "^2.1.1",
+    "puppeteer-core": "^2.1.1"
+  }
+}
