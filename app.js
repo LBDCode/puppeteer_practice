@@ -1,7 +1,6 @@
 const puppeteer = require('puppeteer');
 const path = require('path')
 const fs = require('fs');
-const url = require('url');
 const request = require('request');
 //use node path to create an absolute path to the CERA_downloads dir
 const downloadDestination = path.resolve('./CERA_Downloads');
@@ -65,7 +64,7 @@ const downloadDestination = path.resolve('./CERA_Downloads');
     const downloadShapefile = (url, dest) => {
 
         const file = fs.createWriteStream(dest + '/CERA.zip');
-        const downloadRequest = request.get(url);
+        const downloadRequest = request.get(encodeURI(url));
     
         // send request, and on response if code is 200 pipe the file
         // else log server error
@@ -89,7 +88,7 @@ const downloadDestination = path.resolve('./CERA_Downloads');
     
         // once file is done downloading, log sucess message.  What to do about error handling?
         file.on('finish', () => file.close(() => {
-            console.log("download sucessful, file downloaded to ", path.dirname(file));
+            console.log("download sucessful, file downloaded to ", path.dirname(dest + '/CERA.zip'));
         }));
 
         // check for errors with file/create write stream  If error, unlink the file 
@@ -108,9 +107,7 @@ const downloadDestination = path.resolve('./CERA_Downloads');
     function handleRequest(interceptedRequest) {
         if (interceptedRequest.url().includes("download")) {
             const shapefileDownloadLink = encodeURI(interceptedRequest.url());
-
             console.log('A download request was made:', shapefileDownloadLink);
-
             downloadShapefile(shapefileDownloadLink, downloadDestination);
         } else {
             console.log('A request was made:', interceptedRequest.url());
@@ -130,7 +127,7 @@ const downloadDestination = path.resolve('./CERA_Downloads');
     // remove listener after download save button is clicked, it's no longer needed
     page.removeListener('request', handleRequest);
 
-    await page.waitFor(5000);
+    await page.waitFor(9000);
 
 
     // TODO: uncomment this once everything is working to close browser session
